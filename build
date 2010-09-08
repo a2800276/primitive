@@ -1,0 +1,1 @@
+ ruby template/reformat.rb && javac `find src -name '*.java'` -d bin
