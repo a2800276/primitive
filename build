@@ -1,1 +1,2 @@
- ruby template/reformat.rb && javac `find src -name '*.java'` -d bin
+ mkdir classes
+ ruby template/reformat.rb && javac -Xlint `find src -name '*.java'` -d classes

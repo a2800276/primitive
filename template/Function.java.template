@@ -1,0 +1,8 @@
+package primitive.collection;
+
+<<Warning>>
+
+public abstract class <<Name>>Function {
+  public void     apply(<<Type>> value) {}
+  public <<Type>> accumulate(<<Type>> memo, <<Type>> value) {return <<0>>;}
+} 

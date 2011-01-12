@@ -39,20 +39,16 @@ public class FloatList {
   }
 
   public boolean addAll(FloatList list) {
-    float [] temp = new float[this.size() + list.size()];
-    System.arraycopy(underlyingArray,      0, temp, 0,           this.size());
-    System.arraycopy(list.underlyingArray, 0, temp, this.size(), list.size());
-    this.underlyingArray = temp;
+    ensureCapacity  (list.size());
+    System.arraycopy(list.underlyingArray, 0, this.underlyingArray, this.size(), list.size());
+    this.pos += list.size();
     return true;
   }
 
   public boolean addAll(float [] arr) {
-    float [] temp = new float[this.size() + arr.length];
-    p(temp.length);
-    System.arraycopy(underlyingArray, 0, temp, 0,           this.size());
-    System.arraycopy(arr            , 0, temp, this.size(), arr.length);
-    this.underlyingArray =  temp;
-    this.pos             += arr.length;
+    ensureCapacity  (arr.length);
+    System.arraycopy(arr, 0, this.underlyingArray, this.size(), arr.length);
+    this.pos += arr.length;
     return true;
     
   }
@@ -125,7 +121,7 @@ public class FloatList {
   }
 
   /**
-   *  This deviates from the collection List contract,
+   *  This deviates from the collection.List contract,
    *  because it would be the second remove(int) method
    *  in IntList and polymorphism wouldn't work...
    */
@@ -240,7 +236,7 @@ public class FloatList {
     }
   }
 
-  public static void p (Object o) {
+  private static void p (Object o) {
     System.out.println(o);
   }
   public static void main (String [] args) {
@@ -253,7 +249,7 @@ public class FloatList {
 
     float    value ;
      
-    for (int i=0; i!=120480; ++i) {
+    for (int i=0; i!=250000; ++i) {
       value = rand.nextFloat();
       list.add(value);
     }
@@ -266,9 +262,9 @@ public class FloatList {
 
     start = System.currentTimeMillis();
 
-    java.util.List list2 = new java.util.LinkedList();
+    java.util.List list2 = new java.util.ArrayList();
     
-    for (int i=0; i!=120480; ++i) {
+    for (int i=0; i!=250000; ++i) {
       int value2 = rand.nextInt();
       list2.add(new Integer(value2));
     }
