@@ -59,7 +59,9 @@ public class DoubleList {
   }
 
   public void clear() {
-    this.underlyingArray = new double[DEFAULT];
+    if (null == this.underlyingArray || DEFAULT != this.underlyingArray.length){
+      this.underlyingArray = new double[DEFAULT];
+    }
     this.pos = 0;
 
   }

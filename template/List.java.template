@@ -59,7 +59,9 @@ public class <<Name>>List {
   }
 
   public void clear() {
-    this.underlyingArray = new <<Type>>[DEFAULT];
+    if (null == this.underlyingArray || DEFAULT != this.underlyingArray.length){
+      this.underlyingArray = new <<Type>>[DEFAULT];
+    }
     this.pos = 0;
 
   }

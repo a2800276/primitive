@@ -59,7 +59,9 @@ public class FloatList {
   }
 
   public void clear() {
-    this.underlyingArray = new float[DEFAULT];
+    if (null == this.underlyingArray || DEFAULT != this.underlyingArray.length){
+      this.underlyingArray = new float[DEFAULT];
+    }
     this.pos = 0;
 
   }

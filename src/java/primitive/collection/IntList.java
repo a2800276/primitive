@@ -59,7 +59,9 @@ public class IntList {
   }
 
   public void clear() {
-    this.underlyingArray = new int[DEFAULT];
+    if (null == this.underlyingArray || DEFAULT != this.underlyingArray.length){
+      this.underlyingArray = new int[DEFAULT];
+    }
     this.pos = 0;
 
   }

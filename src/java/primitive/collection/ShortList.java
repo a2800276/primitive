@@ -59,7 +59,9 @@ public class ShortList {
   }
 
   public void clear() {
-    this.underlyingArray = new short[DEFAULT];
+    if (null == this.underlyingArray || DEFAULT != this.underlyingArray.length){
+      this.underlyingArray = new short[DEFAULT];
+    }
     this.pos = 0;
 
   }

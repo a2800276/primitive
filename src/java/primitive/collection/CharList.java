@@ -59,7 +59,9 @@ public class CharList {
   }
 
   public void clear() {
-    this.underlyingArray = new char[DEFAULT];
+    if (null == this.underlyingArray || DEFAULT != this.underlyingArray.length){
+      this.underlyingArray = new char[DEFAULT];
+    }
     this.pos = 0;
 
   }

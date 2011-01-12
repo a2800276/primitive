@@ -59,7 +59,9 @@ public class BooleanList {
   }
 
   public void clear() {
-    this.underlyingArray = new boolean[DEFAULT];
+    if (null == this.underlyingArray || DEFAULT != this.underlyingArray.length){
+      this.underlyingArray = new boolean[DEFAULT];
+    }
     this.pos = 0;
 
   }

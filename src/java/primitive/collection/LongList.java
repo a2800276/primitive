@@ -59,7 +59,9 @@ public class LongList {
   }
 
   public void clear() {
-    this.underlyingArray = new long[DEFAULT];
+    if (null == this.underlyingArray || DEFAULT != this.underlyingArray.length){
+      this.underlyingArray = new long[DEFAULT];
+    }
     this.pos = 0;
 
   }

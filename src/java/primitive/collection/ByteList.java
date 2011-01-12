@@ -59,7 +59,9 @@ public class ByteList {
   }
 
   public void clear() {
-    this.underlyingArray = new byte[DEFAULT];
+    if (null == this.underlyingArray || DEFAULT != this.underlyingArray.length){
+      this.underlyingArray = new byte[DEFAULT];
+    }
     this.pos = 0;
 
   }
