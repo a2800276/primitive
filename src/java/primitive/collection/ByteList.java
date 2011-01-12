@@ -46,11 +46,15 @@ public class ByteList {
   }
 
   public boolean addAll(byte [] arr) {
-    ensureCapacity  (arr.length);
-    System.arraycopy(arr, 0, this.underlyingArray, this.size(), arr.length);
+    return addAll(arr, 0, arr.length);
+  }
+
+  public boolean addAll(byte [] arr, int offset, int len) {
+    ensureCapacity  (len);
+    System.arraycopy(arr, offset, this.underlyingArray, this.size(), len);
     this.pos += arr.length;
     return true;
-    
+
   }
 
 
