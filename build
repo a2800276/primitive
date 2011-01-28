@@ -1,2 +1,3 @@
  mkdir classes
- ruby template/reformat.rb && javac -Xlint `find src -name '*.java'` -d classes
+
+ ruby template/reformat.rb && javac -cp ext/junit.jar -Xlint `find src -name '*.java'` -d classes

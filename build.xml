@@ -7,6 +7,7 @@
 <property name="classes.dir" value="classes"/>
 <property name="assemble.dir" value="assemble"/>
 <property name="lib.dir" value="lib"/>
+<property name="ext.dir" value="ext"/>
 <property name="template.dir" value="template"/>
 <property name="template.script" value="${template.dir}/reformat.rb"/>
 
@@ -29,14 +30,20 @@
 </target>
 
 <target name="compile" depends="prepare">
-  <javac srcdir="src" destdir="${classes.dir}" />
+  <javac srcdir="src" destdir="${classes.dir}">
+    <classpath>
+      <pathelement path="${classpath}"/>
+      <pathelement path="${ext.dir}/junit.jar"/>
+    </classpath>
+  </javac>
 </target>
 
 <target name="jar" depends="compile">
 	<copy todir="${assemble.dir}">
-		<fileset dir="classes"/>
+    <fileset dir="classes">
+    </fileset>
 	</copy>
-	<jar basedir="${assemble.dir}" destfile="lib/${ant.project.name}.jar"/>
+  <jar basedir="${assemble.dir}" destfile="lib/${ant.project.name}.jar" excludes="**/*Test.class"/>
 </target>
 
 <target name="run" depends="jar">
@@ -46,6 +53,23 @@
 <target name="doc">
   <javadoc sourcepath="src/java" destdir="doc">  
 	</javadoc>
+</target>
+
+<target name="test" depends="compile">
+  <junit printsummary="yes">
+    <classpath>
+      <pathelement path="${classes.dir}"/>
+      <pathelement path="${ext.dir}/junit.jar"/>
+    </classpath> 
+    <test name="primitive.collection.BooleanListTest"/>
+    <test name="primitive.collection.ByteListTest"/>
+    <test name="primitive.collection.CharListTest"/>
+    <test name="primitive.collection.DoubleListTest"/>
+    <test name="primitive.collection.FloatListTest"/>
+    <test name="primitive.collection.IntListTest"/>
+    <test name="primitive.collection.LongListTest"/>
+    <test name="primitive.collection.ShortListTest"/>
+  </junit>
 </target>
 
 </project>
