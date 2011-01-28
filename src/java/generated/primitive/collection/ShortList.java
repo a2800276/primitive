@@ -37,7 +37,6 @@ public class ShortList {
   }
 
   public boolean addAll(ShortList list) {
-    if (null == list) { return false; }
     ensureCapacity  (list.size());
     System.arraycopy(list.underlyingArray, 0, this.underlyingArray, this.size(), list.size());
     this.pos += list.size();
@@ -45,12 +44,10 @@ public class ShortList {
   }
 
   public boolean addAll(short [] arr) {
-    if (null == arr) { return false; }
     return addAll(arr, 0, arr.length);
   }
 
   public boolean addAll(short [] arr, int offset, int len) {
-    if (null == arr) { return false; }
     ensureCapacity  (len);
     System.arraycopy(arr, offset, this.underlyingArray, this.size(), len);
     this.pos += arr.length;
