@@ -39,6 +39,7 @@ public class IntList {
   }
 
   public boolean addAll(IntList list) {
+    if (null == list) { return false; }
     ensureCapacity  (list.size());
     System.arraycopy(list.underlyingArray, 0, this.underlyingArray, this.size(), list.size());
     this.pos += list.size();
@@ -46,10 +47,12 @@ public class IntList {
   }
 
   public boolean addAll(int [] arr) {
+    if (null == arr) { return false; }
     return addAll(arr, 0, arr.length);
   }
 
   public boolean addAll(int [] arr, int offset, int len) {
+    if (null == arr) { return false; }
     ensureCapacity  (len);
     System.arraycopy(arr, offset, this.underlyingArray, this.size(), len);
     this.pos += arr.length;
@@ -245,40 +248,40 @@ public class IntList {
   private static void p (Object o) {
     System.out.println(o);
   }
-  public static void main (String [] args) {
-    
-    long start        = System.currentTimeMillis();
-
-    IntList list = new IntList();
-    Random       rand = new Random(0L);
-    byte[]        bla = new byte[1];
-
-    int    value ;
-     
-    for (int i=0; i!=250000; ++i) {
-      value = rand.nextInt();
-      list.add(value);
-    }
-    
-    int[] arr = list.toArray();
-    list.addAll(arr);
-
-
-    p("ok...: "+list.size()+" in: "+(System.currentTimeMillis()-start));
-
-    start = System.currentTimeMillis();
-
-    java.util.List list2 = new java.util.ArrayList();
-    
-    for (int i=0; i!=250000; ++i) {
-      int value2 = rand.nextInt();
-      list2.add(new Integer(value2));
-    }
-    list2.addAll(list2);
-    p("ok...: "+list2.size()+" in: "+(System.currentTimeMillis()-start));
-
-
-  }
+//  public static void main (String [] args) {
+//    
+//    long start        = System.currentTimeMillis();
+//
+//    IntList list = new IntList();
+//    Random       rand = new Random(0L);
+//    byte[]        bla = new byte[1];
+//
+//    int    value ;
+//     
+//    for (int i=0; i!=250000; ++i) {
+//      value = rand.nextInt();
+//      list.add(value);
+//    }
+//    
+//    int[] arr = list.toArray();
+//    list.addAll(arr);
+//
+//
+//    p("ok...: "+list.size()+" in: "+(System.currentTimeMillis()-start));
+//
+//    start = System.currentTimeMillis();
+//
+//    java.util.List list2 = new java.util.ArrayList();
+//    
+//    for (int i=0; i!=250000; ++i) {
+//      int value2 = rand.nextInt();
+//      list2.add(new Integer(value2));
+//    }
+//    list2.addAll(list2);
+//    p("ok...: "+list2.size()+" in: "+(System.currentTimeMillis()-start));
+//
+//
+//  }
 
 }
 
