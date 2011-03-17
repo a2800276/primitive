@@ -30,7 +30,7 @@
 </target>
 
 <target name="compile" depends="prepare">
-  <javac srcdir="src" destdir="${classes.dir}">
+  <javac srcdir="src" destdir="${classes.dir}" debug="true">
     <classpath>
       <pathelement path="${classpath}"/>
       <pathelement path="${ext.dir}/junit.jar"/>
