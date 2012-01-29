@@ -45,7 +45,40 @@ public class ByteListTest extends TestCase {
     list.add(i, val);
     assertEquals(val, list.get(i));
     assertEquals(test, list.get(i+1));
+  }
 
+  @Test public void testAddAllIdx() {
+    ByteList list = new ByteList();
+    ByteList list2 = new ByteList();
+  
+    byte val = 0x00;
+    list2.add(val);
+    list2.add(val);
+    list2.add(val);
+    
+
+    for (int i = 0; i!=50; ++i) {
+      list.add((byte)rand.nextInt(256));
+    }
+    int osz = list.size();
+
+    list.addAll(0, list2);
+    assertEquals(osz+list2.size(), list.size());
+    assertEquals(0x00, list.get(0));
+
+    val = list.get(list.size()-1);
+    list.addAll(list.size()-1, list2);
+    assertEquals(val, list.get(list.size()-1));
+    
+  }
+
+  @Test public void testContainsAll() {
+    ByteList list = new ByteList();
+    for (int i = 0 ; i!= 1000; ++i) {
+      list.add((byte)rand.nextInt(256));
+    }
+    ByteList list2 = list.subList(250,500);
+    assertTrue(list.containsAll(list2));
 
   }
 

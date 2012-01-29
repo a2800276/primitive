@@ -45,7 +45,40 @@ public class ShortListTest extends TestCase {
     list.add(i, val);
     assertEquals(val, list.get(i));
     assertEquals(test, list.get(i+1));
+  }
 
+  @Test public void testAddAllIdx() {
+    ShortList list = new ShortList();
+    ShortList list2 = new ShortList();
+  
+    short val = 0;
+    list2.add(val);
+    list2.add(val);
+    list2.add(val);
+    
+
+    for (int i = 0; i!=50; ++i) {
+      list.add((short)rand.nextInt(32000));
+    }
+    int osz = list.size();
+
+    list.addAll(0, list2);
+    assertEquals(osz+list2.size(), list.size());
+    assertEquals(0, list.get(0));
+
+    val = list.get(list.size()-1);
+    list.addAll(list.size()-1, list2);
+    assertEquals(val, list.get(list.size()-1));
+    
+  }
+
+  @Test public void testContainsAll() {
+    ShortList list = new ShortList();
+    for (int i = 0 ; i!= 1000; ++i) {
+      list.add((short)rand.nextInt(32000));
+    }
+    ShortList list2 = list.subList(250,500);
+    assertTrue(list.containsAll(list2));
 
   }
 

@@ -45,7 +45,40 @@ public class FloatListTest extends TestCase {
     list.add(i, val);
     assertEquals(val, list.get(i));
     assertEquals(test, list.get(i+1));
+  }
 
+  @Test public void testAddAllIdx() {
+    FloatList list = new FloatList();
+    FloatList list2 = new FloatList();
+  
+    float val = 0.0f;
+    list2.add(val);
+    list2.add(val);
+    list2.add(val);
+    
+
+    for (int i = 0; i!=50; ++i) {
+      list.add(rand.nextFloat());
+    }
+    int osz = list.size();
+
+    list.addAll(0, list2);
+    assertEquals(osz+list2.size(), list.size());
+    assertEquals(0.0f, list.get(0));
+
+    val = list.get(list.size()-1);
+    list.addAll(list.size()-1, list2);
+    assertEquals(val, list.get(list.size()-1));
+    
+  }
+
+  @Test public void testContainsAll() {
+    FloatList list = new FloatList();
+    for (int i = 0 ; i!= 1000; ++i) {
+      list.add(rand.nextFloat());
+    }
+    FloatList list2 = list.subList(250,500);
+    assertTrue(list.containsAll(list2));
 
   }
 

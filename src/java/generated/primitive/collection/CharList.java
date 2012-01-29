@@ -60,9 +60,14 @@ public class CharList {
 
   }
 
-
   public boolean addAll(int index, CharList list) {
-    throw new UnsupportedOperationException("TBD");
+    checkIndex(index);
+    ensureCapacity(list.size());
+    int toMove = this.size() - index;
+    System.arraycopy(this.underlyingArray, index, this.underlyingArray, index+list.size(), toMove);
+    System.arraycopy(list.underlyingArray, 0, this.underlyingArray, index, list.size());
+    this.pos += list.size();
+    return true;
   }
 
   public void clear() {
@@ -79,7 +84,12 @@ public class CharList {
 
 
   public boolean containsAll(CharList c) {
-    throw new UnsupportedOperationException("TBD");
+    for (int i = 0; i!=c.size(); ++i) {
+      if (!contains(c.get(i))) {
+        return false;
+      }
+    }
+    return true;
   }
 
 

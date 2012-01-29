@@ -45,7 +45,40 @@ public class LongListTest extends TestCase {
     list.add(i, val);
     assertEquals(val, list.get(i));
     assertEquals(test, list.get(i+1));
+  }
 
+  @Test public void testAddAllIdx() {
+    LongList list = new LongList();
+    LongList list2 = new LongList();
+  
+    long val = 0L;
+    list2.add(val);
+    list2.add(val);
+    list2.add(val);
+    
+
+    for (int i = 0; i!=50; ++i) {
+      list.add(rand.nextLong());
+    }
+    int osz = list.size();
+
+    list.addAll(0, list2);
+    assertEquals(osz+list2.size(), list.size());
+    assertEquals(0L, list.get(0));
+
+    val = list.get(list.size()-1);
+    list.addAll(list.size()-1, list2);
+    assertEquals(val, list.get(list.size()-1));
+    
+  }
+
+  @Test public void testContainsAll() {
+    LongList list = new LongList();
+    for (int i = 0 ; i!= 1000; ++i) {
+      list.add(rand.nextLong());
+    }
+    LongList list2 = list.subList(250,500);
+    assertTrue(list.containsAll(list2));
 
   }
 
