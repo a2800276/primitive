@@ -23,6 +23,32 @@ public class FloatListTest extends TestCase {
     assertTrue(arrEquals(arr, list.toArray()));
   }
 
+  @Test public void testAddIdx() {
+    FloatList list = new FloatList();
+    for (int i = 0; i!=50; ++i) {
+      list.add(rand.nextFloat());
+    }
+    float val  = 0.0f;
+    float test = list.get(0);
+    list.add(0, val);
+    assertEquals(val, list.get(0));
+    assertEquals(test, list.get(1));
+
+    int i = list.size()-1;
+    test = list.get(i);
+    list.add(i, val);
+    assertEquals(val, list.get(i));
+    assertEquals(test, list.get(i+1));
+
+    i = list.size()/2;
+    test = list.get(i);
+    list.add(i, val);
+    assertEquals(val, list.get(i));
+    assertEquals(test, list.get(i+1));
+
+
+  }
+
   static boolean arrEquals (float [] arr1, float [] arr2) {
     // unfortunately, junit provides no assertArrayEquals for:
     // boolean [], float[] and double[]

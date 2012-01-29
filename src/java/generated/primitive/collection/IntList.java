@@ -37,6 +37,8 @@ public class IntList {
     ensureCapacity(1);
     int toMove = this.size() - index;
     System.arraycopy(this.underlyingArray, index, this.underlyingArray, index+1, toMove); 
+    this.underlyingArray[index] = element;
+    ++this.pos;
   }
 
   public boolean addAll(IntList list) {

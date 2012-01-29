@@ -56,7 +56,8 @@
 </target>
 
 <target name="test" depends="compile">
-  <junit printsummary="yes">
+  <junit printsummary="yes" showoutput="yes">
+    <formatter type="plain"/>
     <classpath>
       <pathelement path="${classes.dir}"/>
       <pathelement path="${ext.dir}/junit.jar"/>

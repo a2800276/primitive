@@ -23,6 +23,32 @@ public class ByteListTest extends TestCase {
     assertTrue(arrEquals(arr, list.toArray()));
   }
 
+  @Test public void testAddIdx() {
+    ByteList list = new ByteList();
+    for (int i = 0; i!=50; ++i) {
+      list.add((byte)rand.nextInt(256));
+    }
+    byte val  = 0x00;
+    byte test = list.get(0);
+    list.add(0, val);
+    assertEquals(val, list.get(0));
+    assertEquals(test, list.get(1));
+
+    int i = list.size()-1;
+    test = list.get(i);
+    list.add(i, val);
+    assertEquals(val, list.get(i));
+    assertEquals(test, list.get(i+1));
+
+    i = list.size()/2;
+    test = list.get(i);
+    list.add(i, val);
+    assertEquals(val, list.get(i));
+    assertEquals(test, list.get(i+1));
+
+
+  }
+
   static boolean arrEquals (byte [] arr1, byte [] arr2) {
     // unfortunately, junit provides no assertArrayEquals for:
     // boolean [], float[] and double[]
