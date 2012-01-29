@@ -35,7 +35,10 @@ public class IntList {
   }
 
   public void add(int index, int element) {
-    throw new UnsupportedOperationException("TBD");
+    checkIndex(index);
+    ensureCapacity(1);
+    int toMove = this.size() - index;
+    System.arraycopy(this.underlyingArray, index, this.underlyingArray, index+1, toMove); 
   }
 
   public boolean addAll(IntList list) {
@@ -81,8 +84,7 @@ public class IntList {
 
 
   public int get(int index) {
-    if (!(index<size()))
-      throw new ArrayIndexOutOfBoundsException();
+    checkIndex(index);
     return this.underlyingArray [index];
 
   }
@@ -147,9 +149,7 @@ public class IntList {
 
 
   public int set(int index, int element) {
-    if (index < 0 || index >= size()){
-      throw new IndexOutOfBoundsException();
-    }
+    checkIndex(index);
     int ret = get(index);
     this.underlyingArray[index] = element;
     return ret;
@@ -160,9 +160,14 @@ public class IntList {
     return pos;
   }
 
-
+  /**
+   * this currently diverges from the `List` contract in that it 
+   * returns a copy instead of a list backed by the same array.
+   */
   public IntList subList(int fromIndex, int toIndex) {
-    if (fromIndex < 0 || toIndex > size() || fromIndex > toIndex){
+    checkIndex(fromIndex);
+    checkIndex(toIndex);
+    if (fromIndex > toIndex){
       throw new IndexOutOfBoundsException();
     }
 
@@ -181,14 +186,18 @@ public class IntList {
 
   }
 
-
+  void checkIndex(int idx) {
+    if (0 > idx || idx >= this.size()) {
+      throw new IndexOutOfBoundsException();
+    }
+  }
 
   /**
     makes sure that there is at least room for
     <code>size</code> further elements in the internal array
     and "grows" it if necessary.
     */
-  private void ensureCapacity (int size) {
+  void ensureCapacity (int size) {
     int capacity = this.underlyingArray.length - pos;
     if (capacity<size){
       resize (this.underlyingArray.length+size);		
@@ -198,7 +207,7 @@ public class IntList {
   /**
     "grows" the array to a new length of <code>len</code>.
     */
-  private void resize (int len) {
+  void resize (int len) {
     int newLen = max(len,(int)(this.underlyingArray.length*RESIZE));
     int [] newArr = new int[newLen];
     System.arraycopy (this.underlyingArray,0,newArr,0,pos);
@@ -209,7 +218,7 @@ public class IntList {
     utility to return the larger of the two provided
     parameters.
     */
-  private int max (int i, int j) {
+  int max (int i, int j) {
     return i>j?i:j;	
   }
 
@@ -222,9 +231,7 @@ public class IntList {
     }
 
     public Iterator(IntList list, int index) {
-      if (index < 0 || index > list.size()){
-        throw new IndexOutOfBoundsException();
-      }
+      checkIndex(index);
       this.list = list;
       this.pos  = index;
     }
