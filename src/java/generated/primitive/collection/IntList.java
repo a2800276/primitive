@@ -85,7 +85,7 @@ public class IntList {
 
   public boolean containsAll(IntList c) {
     for (int i = 0; i!=c.size(); ++i) {
-      if (!contains(c.get(i))) {
+      if (!this.contains(c.get(i))) {
         return false;
       }
     }
@@ -135,7 +135,12 @@ public class IntList {
   }
 
   public boolean remove(int value) {
-    throw new UnsupportedOperationException("TBD");
+    int idx = this.indexOf(value);
+    if (-1 == idx) {
+      return false;
+    }
+    this.removeIdx(idx);
+    return true;
   }
 
   /**
@@ -144,12 +149,26 @@ public class IntList {
    *  in IntList and polymorphism wouldn't work...
    */
   public int removeIdx(int index) {
-    throw new UnsupportedOperationException("TBD");
+    checkIndex(index);
+    int value = get(index);
+    int toMove = this.size() - index - 1;
+    if (0 != toMove) {
+      System.arraycopy(this.underlyingArray, index+1, this.underlyingArray, index, toMove);
+    }
+    --this.pos;
+    return value;
   }
 
 
   public boolean removeAll(IntList list) {
-    throw new UnsupportedOperationException("TBD");
+    boolean removed = false;
+    for (int i = 0; i!=list.size(); ++i) {
+      int val = list.get(i);
+      while (this.remove(val)) {
+        removed = true;
+      }
+    }
+    return removed;
   }
 
 
@@ -255,7 +274,8 @@ public class IntList {
       return list.get(this.pos++);
     }
     void remove() {
-      throw new UnsupportedOperationException("TBD");
+      this.list.removeIdx(this.pos);
+      --this.pos;
     }
   }
 

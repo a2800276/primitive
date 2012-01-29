@@ -79,8 +79,28 @@ public class BooleanListTest extends TestCase {
     }
     BooleanList list2 = list.subList(250,500);
     assertTrue(list.containsAll(list2));
-
   }
+
+  @Test public void testRemoveIdx() {
+    BooleanList list = new BooleanList();
+    for (int i = 0 ; i!= 1000; ++i) {
+      list.add(rand.nextBoolean());
+    }
+    int osz = list.size();
+    boolean oval1 = list.get(list.size()-1);
+    boolean oval2 = list.removeIdx(list.size()-1);
+    assertEquals(osz-1, list.size());
+    assertEquals(oval1, oval2);
+
+    oval1 = list.get(0);
+    oval2 = list.removeIdx(0);
+
+    assertEquals(osz-2, list.size());
+    assertEquals(oval1, oval2);
+     
+  }
+
+  
 
   static boolean arrEquals (boolean [] arr1, boolean [] arr2) {
     // unfortunately, junit provides no assertArrayEquals for:
