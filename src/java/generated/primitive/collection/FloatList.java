@@ -70,12 +70,15 @@ public class FloatList {
     return true;
   }
 
-  public void clear() {
+  /** Slight deviation from List contract: returns itself instead of void,
+   *  this allows doing: list = null == list ? new FloatList() : list.clear().
+   */
+  public FloatList clear() {
     if (null == this.underlyingArray || DEFAULT != this.underlyingArray.length){
       this.underlyingArray = new float[DEFAULT];
     }
     this.pos = 0;
-
+    return this;
   }
 
   public boolean contains(float value) {

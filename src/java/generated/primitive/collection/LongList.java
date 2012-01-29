@@ -70,12 +70,15 @@ public class LongList {
     return true;
   }
 
-  public void clear() {
+  /** Slight deviation from List contract: returns itself instead of void,
+   *  this allows doing: list = null == list ? new LongList() : list.clear().
+   */
+  public LongList clear() {
     if (null == this.underlyingArray || DEFAULT != this.underlyingArray.length){
       this.underlyingArray = new long[DEFAULT];
     }
     this.pos = 0;
-
+    return this;
   }
 
   public boolean contains(long value) {

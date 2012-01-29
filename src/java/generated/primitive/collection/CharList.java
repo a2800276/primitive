@@ -70,12 +70,15 @@ public class CharList {
     return true;
   }
 
-  public void clear() {
+  /** Slight deviation from List contract: returns itself instead of void,
+   *  this allows doing: list = null == list ? new CharList() : list.clear().
+   */
+  public CharList clear() {
     if (null == this.underlyingArray || DEFAULT != this.underlyingArray.length){
       this.underlyingArray = new char[DEFAULT];
     }
     this.pos = 0;
-
+    return this;
   }
 
   public boolean contains(char value) {

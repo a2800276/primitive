@@ -70,12 +70,15 @@ public class IntList {
     return true;
   }
 
-  public void clear() {
+  /** Slight deviation from List contract: returns itself instead of void,
+   *  this allows doing: list = null == list ? new IntList() : list.clear().
+   */
+  public IntList clear() {
     if (null == this.underlyingArray || DEFAULT != this.underlyingArray.length){
       this.underlyingArray = new int[DEFAULT];
     }
     this.pos = 0;
-
+    return this;
   }
 
   public boolean contains(int value) {
