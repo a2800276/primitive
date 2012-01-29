@@ -33,7 +33,10 @@ public class LongList {
   }
 
   public void add(int index, long element) {
-    throw new UnsupportedOperationException("TBD");
+    checkIndex(index);
+    ensureCapacity(1);
+    int toMove = this.size() - index;
+    System.arraycopy(this.underlyingArray, index, this.underlyingArray, index+1, toMove); 
   }
 
   public boolean addAll(LongList list) {
@@ -79,8 +82,7 @@ public class LongList {
 
 
   public long get(int index) {
-    if (!(index<size()))
-      throw new ArrayIndexOutOfBoundsException();
+    checkIndex(index);
     return this.underlyingArray [index];
 
   }
@@ -145,9 +147,7 @@ public class LongList {
 
 
   public long set(int index, long element) {
-    if (index < 0 || index >= size()){
-      throw new IndexOutOfBoundsException();
-    }
+    checkIndex(index);
     long ret = get(index);
     this.underlyingArray[index] = element;
     return ret;
@@ -158,9 +158,14 @@ public class LongList {
     return pos;
   }
 
-
+  /**
+   * this currently diverges from the `List` contract in that it 
+   * returns a copy instead of a list backed by the same array.
+   */
   public LongList subList(int fromIndex, int toIndex) {
-    if (fromIndex < 0 || toIndex > size() || fromIndex > toIndex){
+    checkIndex(fromIndex);
+    checkIndex(toIndex);
+    if (fromIndex > toIndex){
       throw new IndexOutOfBoundsException();
     }
 
@@ -179,14 +184,18 @@ public class LongList {
 
   }
 
-
+  void checkIndex(int idx) {
+    if (0 > idx || idx >= this.size()) {
+      throw new IndexOutOfBoundsException();
+    }
+  }
 
   /**
     makes sure that there is at least room for
     <code>size</code> further elements in the internal array
     and "grows" it if necessary.
     */
-  private void ensureCapacity (int size) {
+  void ensureCapacity (int size) {
     int capacity = this.underlyingArray.length - pos;
     if (capacity<size){
       resize (this.underlyingArray.length+size);		
@@ -196,7 +205,7 @@ public class LongList {
   /**
     "grows" the array to a new length of <code>len</code>.
     */
-  private void resize (int len) {
+  void resize (int len) {
     int newLen = max(len,(int)(this.underlyingArray.length*RESIZE));
     long [] newArr = new long[newLen];
     System.arraycopy (this.underlyingArray,0,newArr,0,pos);
@@ -207,7 +216,7 @@ public class LongList {
     utility to return the larger of the two provided
     parameters.
     */
-  private int max (int i, int j) {
+  int max (int i, int j) {
     return i>j?i:j;	
   }
 
@@ -220,9 +229,7 @@ public class LongList {
     }
 
     public Iterator(LongList list, int index) {
-      if (index < 0 || index > list.size()){
-        throw new IndexOutOfBoundsException();
-      }
+      checkIndex(index);
       this.list = list;
       this.pos  = index;
     }
