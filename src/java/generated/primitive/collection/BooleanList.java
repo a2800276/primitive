@@ -74,7 +74,7 @@ public class BooleanList {
    *  this allows doing: list = null == list ? new BooleanList() : list.clear().
    */
   public BooleanList clear() {
-    if (null == this.underlyingArray || DEFAULT != this.underlyingArray.length){
+    if (null == this.underlyingArray || DEFAULT < this.underlyingArray.length){
       this.underlyingArray = new boolean[DEFAULT];
     }
     this.pos = 0;

@@ -74,7 +74,7 @@ public class FloatList {
    *  this allows doing: list = null == list ? new FloatList() : list.clear().
    */
   public FloatList clear() {
-    if (null == this.underlyingArray || DEFAULT != this.underlyingArray.length){
+    if (null == this.underlyingArray || DEFAULT < this.underlyingArray.length){
       this.underlyingArray = new float[DEFAULT];
     }
     this.pos = 0;

@@ -74,7 +74,7 @@ public class ShortList {
    *  this allows doing: list = null == list ? new ShortList() : list.clear().
    */
   public ShortList clear() {
-    if (null == this.underlyingArray || DEFAULT != this.underlyingArray.length){
+    if (null == this.underlyingArray || DEFAULT < this.underlyingArray.length){
       this.underlyingArray = new short[DEFAULT];
     }
     this.pos = 0;

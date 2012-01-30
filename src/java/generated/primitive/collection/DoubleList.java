@@ -74,7 +74,7 @@ public class DoubleList {
    *  this allows doing: list = null == list ? new DoubleList() : list.clear().
    */
   public DoubleList clear() {
-    if (null == this.underlyingArray || DEFAULT != this.underlyingArray.length){
+    if (null == this.underlyingArray || DEFAULT < this.underlyingArray.length){
       this.underlyingArray = new double[DEFAULT];
     }
     this.pos = 0;

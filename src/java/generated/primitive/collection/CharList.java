@@ -74,7 +74,7 @@ public class CharList {
    *  this allows doing: list = null == list ? new CharList() : list.clear().
    */
   public CharList clear() {
-    if (null == this.underlyingArray || DEFAULT != this.underlyingArray.length){
+    if (null == this.underlyingArray || DEFAULT < this.underlyingArray.length){
       this.underlyingArray = new char[DEFAULT];
     }
     this.pos = 0;

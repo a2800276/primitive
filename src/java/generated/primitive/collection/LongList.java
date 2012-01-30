@@ -74,7 +74,7 @@ public class LongList {
    *  this allows doing: list = null == list ? new LongList() : list.clear().
    */
   public LongList clear() {
-    if (null == this.underlyingArray || DEFAULT != this.underlyingArray.length){
+    if (null == this.underlyingArray || DEFAULT < this.underlyingArray.length){
       this.underlyingArray = new long[DEFAULT];
     }
     this.pos = 0;

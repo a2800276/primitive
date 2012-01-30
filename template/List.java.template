@@ -74,7 +74,7 @@ public class <<Name>>List {
    *  this allows doing: list = null == list ? new <<Name>>List() : list.clear().
    */
   public <<Name>>List clear() {
-    if (null == this.underlyingArray || DEFAULT != this.underlyingArray.length){
+    if (null == this.underlyingArray || DEFAULT < this.underlyingArray.length){
       this.underlyingArray = new <<Type>>[DEFAULT];
     }
     this.pos = 0;

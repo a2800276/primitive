@@ -74,7 +74,7 @@ public class ByteList {
    *  this allows doing: list = null == list ? new ByteList() : list.clear().
    */
   public ByteList clear() {
-    if (null == this.underlyingArray || DEFAULT != this.underlyingArray.length){
+    if (null == this.underlyingArray || DEFAULT < this.underlyingArray.length){
       this.underlyingArray = new byte[DEFAULT];
     }
     this.pos = 0;
