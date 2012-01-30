@@ -32,6 +32,10 @@ public class FloatList {
     return true;
   }
 
+  public boolean add(float[] arr) {
+    return this.addAll(arr);
+  }
+
   public void add(int index, float element) {
     checkIndex(index);
     ensureCapacity(1);

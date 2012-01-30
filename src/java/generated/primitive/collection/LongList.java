@@ -32,6 +32,10 @@ public class LongList {
     return true;
   }
 
+  public boolean add(long[] arr) {
+    return this.addAll(arr);
+  }
+
   public void add(int index, long element) {
     checkIndex(index);
     ensureCapacity(1);

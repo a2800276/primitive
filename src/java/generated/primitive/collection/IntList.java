@@ -32,6 +32,10 @@ public class IntList {
     return true;
   }
 
+  public boolean add(int[] arr) {
+    return this.addAll(arr);
+  }
+
   public void add(int index, int element) {
     checkIndex(index);
     ensureCapacity(1);

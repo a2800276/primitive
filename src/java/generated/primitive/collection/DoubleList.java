@@ -32,6 +32,10 @@ public class DoubleList {
     return true;
   }
 
+  public boolean add(double[] arr) {
+    return this.addAll(arr);
+  }
+
   public void add(int index, double element) {
     checkIndex(index);
     ensureCapacity(1);

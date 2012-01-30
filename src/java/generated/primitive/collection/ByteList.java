@@ -32,6 +32,10 @@ public class ByteList {
     return true;
   }
 
+  public boolean add(byte[] arr) {
+    return this.addAll(arr);
+  }
+
   public void add(int index, byte element) {
     checkIndex(index);
     ensureCapacity(1);

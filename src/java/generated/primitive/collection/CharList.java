@@ -32,6 +32,10 @@ public class CharList {
     return true;
   }
 
+  public boolean add(char[] arr) {
+    return this.addAll(arr);
+  }
+
   public void add(int index, char element) {
     checkIndex(index);
     ensureCapacity(1);

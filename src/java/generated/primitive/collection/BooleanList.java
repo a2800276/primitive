@@ -32,6 +32,10 @@ public class BooleanList {
     return true;
   }
 
+  public boolean add(boolean[] arr) {
+    return this.addAll(arr);
+  }
+
   public void add(int index, boolean element) {
     checkIndex(index);
     ensureCapacity(1);

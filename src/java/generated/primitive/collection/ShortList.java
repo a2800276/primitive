@@ -32,6 +32,10 @@ public class ShortList {
     return true;
   }
 
+  public boolean add(short[] arr) {
+    return this.addAll(arr);
+  }
+
   public void add(int index, short element) {
     checkIndex(index);
     ensureCapacity(1);

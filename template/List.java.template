@@ -32,6 +32,10 @@ public class <<Name>>List {
     return true;
   }
 
+  public boolean add(<<Type>>[] arr) {
+    return this.addAll(arr);
+  }
+
   public void add(int index, <<Type>> element) {
     checkIndex(index);
     ensureCapacity(1);
